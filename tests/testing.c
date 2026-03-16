@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "assertions.h"
-#include "../built/poly_funcs.h"
-#include "../built/sys_funcs.h"
+#include <assertions.h>
+#include <poly_funcs.h>
+#include <sys_funcs.h>
 #include "testing.h"
 
 TEST(test_char_concatination) {
