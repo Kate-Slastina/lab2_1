@@ -7,7 +7,7 @@
 #include <poly_funcs.h>
 
 int main(){
-    setlocale(LC_ALL, "en_US.UTF-8");
+    setlocale(LC_ALL, "");
     
     int check = 0, check2 = 0, choice = 0, left = 0, right = 0, start = 0;
     size_t mass_size = 1, capacity = 0, length = 0, mass_last_elem = 0;
@@ -71,6 +71,10 @@ int main(){
             case 2:
                 printf("Введите строку (char): ");
                 temp_str = read_char(&length, &capacity);
+                if (temp_str == NULL) {
+                    printf("Ошибка ввода строки\n");
+                    break;
+                }
                 str_mass[mass_last_elem] = create_string(temp_str, char_concat, char_substr, char_to_wchar_recode, length, capacity, 0);
                 additional_info[mass_last_elem] = 0;
                 free(temp_str);

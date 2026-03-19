@@ -59,7 +59,7 @@ poly_str* wchar_concat(poly_str* str1, poly_str* str2){
     for(size_t i = str1->length; i < str1->length + str2->length; i++){
         concatinated_str[i] = ((wchar_t*)str2->data)[i - str1->length];
     }
-    concatinated_str[str1->length + str2->length] = L'\0';
+    concatinated_str[str1->length + str2->length] = 0;
     //wprintf(L"\nСтрока итог:%ls\n", (wchar_t*)concatinated_str);
     return create_string(concatinated_str, wchar_concat, wchar_substr, wchar_to_char_recode, str1->length + str2->length, str1->length + str2->length + 1, 1);
 }
@@ -358,13 +358,23 @@ poly_str* create_string(void* str, poly_str* (*concatination)(poly_str* s1, poly
 }
 
 poly_str* string_concatination(poly_str* string1, poly_str* string2){
+    if(string1 == NULL || string2 == NULL){
+        printf("Ошибка пкередачи параметров(");
+        return NULL;
+    }
     return string1->ops.concatination(string1, string2);
 }
 
 poly_str* string_substr(poly_str* str, size_t start, size_t length){
+    if (str == NULL){
+        return NULL;
+    }
     return str->ops.substr(str, start, length);
 }
 
 poly_str* string_recode(poly_str* str){
+    if (str == NULL){
+        return NULL;
+    }
     return str->ops.recode(str);
 }

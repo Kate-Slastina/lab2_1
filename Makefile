@@ -2,7 +2,6 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g -std=c11 -MMD -MP
 INCLUDES = -I. -Iincludes -Isrc -Itests
 
-# Убрали .exe, так как на macOS исполняемые файлы обычно без расширения
 MAIN_TARGET = build/bin/app
 TEST_TARGET = build/bin/test
 TEST_LIB = build/libtesting.a

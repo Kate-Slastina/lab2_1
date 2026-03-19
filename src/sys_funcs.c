@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <wchar.h>
 #include <string.h>
-#include "poly_funcs.h"
-#include "sys_funcs.h"
+#include <poly_funcs.h>
+#include <sys_funcs.h>
 
 char* read_char(size_t* length, size_t* capacity){
     *capacity = 16;
@@ -37,7 +37,7 @@ wchar_t* read_wchart(size_t* length, size_t* capacity){
     // Выделяем буфер под wchar_t
     wchar_t *buffer = malloc((*capacity) * sizeof(wchar_t));
     if(buffer == NULL){
-        wprintf(L"Не удалось выделить память на буффер.\n");
+        printf("Не удалось выделить память на буффер.\n");
         return NULL;
     }
     
@@ -61,7 +61,7 @@ wchar_t* read_wchart(size_t* length, size_t* capacity){
         return NULL;
     }
     
-    buffer[*length] = L'\0';
+    buffer[*length] = 0;
     *capacity = *length + 1;
     
     return buffer;
