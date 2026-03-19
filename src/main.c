@@ -56,7 +56,7 @@ int main(){
                     printf("Ошибка ввода строки\n");
                     break;
                 }
-
+                //wprintf(L"Строка на входе: %ls", (wchar_t*)temp_str);
                 str_mass[mass_last_elem] = create_string(temp_str, wchar_concat, wchar_substr, wchar_to_char_recode, length, capacity, 1);
                 additional_info[mass_last_elem] = 1;
                 free(temp_str);

@@ -4,9 +4,10 @@
 #include <string.h>
 #include <poly_funcs.h>
 #include <sys_funcs.h>
+#define BUFFER_SIZE (size_t)128
 
 char* read_char(size_t* length, size_t* capacity){
-    *capacity = 16;
+    *capacity = BUFFER_SIZE;
     *length = 0;
     char *buffer = malloc((*capacity) * sizeof(char));
     if(buffer == NULL){
@@ -31,7 +32,7 @@ char* read_char(size_t* length, size_t* capacity){
 }
 
 wchar_t* read_wchart(size_t* length, size_t* capacity){
-    *capacity = 16;
+    *capacity = BUFFER_SIZE;
     *length = 0;
     
     // Выделяем буфер под wchar_t

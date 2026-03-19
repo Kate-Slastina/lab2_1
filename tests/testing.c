@@ -21,6 +21,21 @@ TEST(test_char_concatination) {
         free(str2->data); free(str2);
         free(result->data); free(result);
     }
+
+    // Тест 1.2: Простая конкатенация RUS
+    {
+        poly_str* str1 = create_string("Катя любит", char_concat, char_substr, char_to_wchar_recode, 19, 20, 0);
+        poly_str* str2 = create_string(" бабл ти", char_concat, char_substr, char_to_wchar_recode, 14, 15, 0);
+        poly_str* result = string_concatination(str1, str2);
+        //printf("тест %s", (char*)result->data);
+        assert(result != NULL);
+        assert(strcmp((char*)result->data, "Катя любит бабл ти") == 0);
+        assert(result->length == 33);
+        
+        free(str1->data); free(str1);
+        free(str2->data); free(str2);
+        free(result->data); free(result);
+    }
     
     // Тест 2: Передача NULL
     {
@@ -52,14 +67,29 @@ TEST(test_char_concatination) {
 TEST(test_wchar_concatination) {
     // Тест 1: Конкатенация широких строк
     {
-        wchar_t* ws1 = L"Привет";
-        wchar_t* ws2 = L" Мир";
+        wchar_t* ws1 = L"Hi";
+        wchar_t* ws2 = L" world";
         poly_str* str1 = create_string(ws1, wchar_concat, wchar_substr, wchar_to_char_recode, wcslen(ws1), wcslen(ws1)+1, 1);
         poly_str* str2 = create_string(ws2, wchar_concat, wchar_substr, wchar_to_char_recode, wcslen(ws2), wcslen(ws2)+1, 1);
         poly_str* result = string_concatination(str1, str2);
         
         assert(result != NULL);
-        assert(result->length == 10);
+        assert(result->length == 8);
+        
+        free(str1->data); free(str1);
+        free(str2->data); free(str2);
+        free(result->data); free(result);
+    }
+    // Тест 1.2: Конкатенация широких строк RUS
+    {
+        wchar_t* ws1 = L"Катя любит";
+        wchar_t* ws2 = L" буба ти";
+        poly_str* str1 = create_string(ws1, wchar_concat, wchar_substr, wchar_to_char_recode, wcslen(ws1), wcslen(ws1)+1, 1);
+        poly_str* str2 = create_string(ws2, wchar_concat, wchar_substr, wchar_to_char_recode, wcslen(ws2), wcslen(ws2)+1, 1);
+        poly_str* result = string_concatination(str1, str2);
+        
+        assert(result != NULL);
+        assert(result->length == 18);
         
         free(str1->data); free(str1);
         free(str2->data); free(str2);
@@ -118,6 +148,28 @@ TEST(test_char_to_wchar_recode) {
         free(str->data); free(str);
         if(result) { free(result->data); free(result); }
     }
+
+    {
+        poly_str* str = create_string("Боба ти", char_concat, char_substr, char_to_wchar_recode, 13, 14, 0);
+        poly_str* result = string_recode(str);
+        
+        assert(result != NULL);
+        assert(result->length == 7);
+        
+        free(str->data); free(str);
+        if(result) { free(result->data); free(result); }
+    }
+
+    {
+        poly_str* str = create_string("😑", char_concat, char_substr, char_to_wchar_recode, 4, 5, 0);
+        poly_str* result = string_recode(str);
+        
+        assert(result != NULL);
+        assert(result->length == 2);
+        
+        free(str->data); free(str);
+        if(result) { free(result->data); free(result); }
+    }
 }
 
 TEST(test_wchar_to_char_recode) {
@@ -126,6 +178,28 @@ TEST(test_wchar_to_char_recode) {
         poly_str* str = create_string(ws, wchar_concat, wchar_substr, wchar_to_char_recode, wcslen(ws), wcslen(ws)+1, 1);
         poly_str* result = string_recode(str);
         
+        assert(result != NULL);
+        assert(result->length == 4);
+        
+        free(str->data); free(str);
+        if(result) { free(result->data); free(result); }
+    }
+
+    {
+        wchar_t* ws = L"Буба ти";
+        poly_str* str = create_string(ws, wchar_concat, wchar_substr, wchar_to_char_recode, wcslen(ws), wcslen(ws)+1, 1);
+        poly_str* result = string_recode(str);
+        assert(result != NULL);
+        assert(result->length == 13);
+        
+        free(str->data); free(str);
+        if(result) { free(result->data); free(result); }
+    }
+
+    {
+        wchar_t* ws = L"😑";
+        poly_str* str = create_string(ws, wchar_concat, wchar_substr, wchar_to_char_recode, wcslen(ws), wcslen(ws)+1, 1);
+        poly_str* result = string_recode(str);
         assert(result != NULL);
         assert(result->length == 4);
         

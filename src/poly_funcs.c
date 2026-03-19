@@ -323,7 +323,7 @@ poly_str* char_to_wchar_recode(poly_str* str) {
         i += seq_len;
     }
 
-    result_data[result_idx] = L'\0';
+    result_data[result_idx] = 0;
     return create_string(result_data, wchar_concat, wchar_substr, wchar_to_char_recode, wchar_count, wchar_count + 1, 1);
 }
 
@@ -359,7 +359,7 @@ poly_str* create_string(void* str, poly_str* (*concatination)(poly_str* s1, poly
 
 poly_str* string_concatination(poly_str* string1, poly_str* string2){
     if(string1 == NULL || string2 == NULL){
-        printf("Ошибка пкередачи параметров(");
+        printf("Ошибка передачи параметров");
         return NULL;
     }
     return string1->ops.concatination(string1, string2);
